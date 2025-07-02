@@ -10,7 +10,6 @@ COPY main.go main.go
 RUN go get
 RUN go build \
   -ldflags "-s -w -extldflags '-static'" \
-  -installsuffix cgo \
   -o build/action .
 
 RUN echo "nobody:x:65534:65534:nobody:/:" > /etc_passwd

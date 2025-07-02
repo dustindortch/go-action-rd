@@ -243,7 +243,7 @@ func main() {
 			githubactions.Fatalf("failed %s request to %s: %v", http.MethodPut, config.BaseURL, err)
 		}
 
-		if !HttpStatusOK(http.MethodPut, createEnvResp.StatusCode) {
+		if createEnvResp.StatusCode != http.StatusOK {
 			githubactions.Fatalf("failed to create environment '%s' with status code: %d", environment, createEnvResp.StatusCode)
 		}
 

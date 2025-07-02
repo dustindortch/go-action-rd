@@ -20,6 +20,6 @@ jobs:
           delete: ${{ github.event.client_payload.delete || 'false' }}
           environment: ${{ github.event.client_payload.environment }}
           repository: ${{ github.event.client_payload.repository }}
-          secrets: ${{ github.event.client_payload.secrets || '{}' }}
-          variables: ${{ github.event.client_payload.variables || '{}' }}
+          secrets: ${{ toJson(github.event.client_payload.secrets) || '{}' }}
+          variables: ${{ toJson(github.event.client_payload.variables) || '{}' }}
 ...

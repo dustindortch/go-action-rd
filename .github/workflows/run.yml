@@ -1,0 +1,23 @@
+---
+name: Go Action Example
+
+on:
+  repository_dispatch:
+    types:
+      - greeting
+
+jobs:
+  greet-me:
+    runs-on: ubuntu-latest
+    steps:
+      - id: greeting
+        name: Run Go Action
+        uses: dustindortch/go-action@main
+        with:
+          name: ${{ github.event.client_payload.name }}
+
+      - name: Print Greeting
+        shell: bash
+        run: |
+          echo "${{ steps.greeting.outputs.greeting }}"
+...

@@ -1,0 +1,20 @@
+---
+name: Go Action
+description: A GitHub Action written in Go.
+
+inputs:
+  name:
+    description: 'Name to greet'
+    required: true
+    default: 'World'
+
+outputs:
+  greeting:
+    description: 'The greeting message'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.name }}
+...

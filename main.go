@@ -264,4 +264,19 @@ func main() {
 		log.Printf("successfully deleted environment '%s'", environment)
 		return
 	}
+
+	publicKey, err = GetPublicKey(config)
+	if err != nil {
+		githubactions.Fatalf("failed to get public key: %v", err)
+	}
+
+	err = SetValues(config, &secretsMap, "secret")
+	if err != nil {
+		githubactions.Fatalf("failed to set secrets: %v", err)
+	}
+
+	err = SetValues(config, &variablesMap, "variable")
+	if err != nil {
+		githubactions.Fatalf("failed to set variables: %v", err)
+	}
 }

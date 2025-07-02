@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          GITHUB_TOKEN: ${{ secrets.PAT }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         id: environment
         name: Run Go Action
-        uses: dustindortch/go-action@main
+        uses: dustindortch/go-action-rd@main
         with:
           delete: ${{ github.event.client_payload.delete || 'false' }}
           environment: ${{ github.event.client_payload.environment }}

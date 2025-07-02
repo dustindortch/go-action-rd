@@ -4,20 +4,21 @@ name: Go Action Example
 on:
   repository_dispatch:
     types:
-      - greeting
+      - environment
 
 jobs:
   greet-me:
     runs-on: ubuntu-latest
     steps:
-      - id: greeting
+      - env:
+          GITHUB_TOKEN: ${{ secrets.PAT }}
+        id: environment
         name: Run Go Action
         uses: dustindortch/go-action@main
         with:
-          name: ${{ github.event.client_payload.name }}
-
-      - name: Print Greeting
-        shell: bash
-        run: |
-          echo "${{ steps.greeting.outputs.greeting }}"
+          delete: ${{ github.event.client_payload.delete || 'false' }}
+          environment: ${{ github.event.client_payload.environment }}
+          repository: ${{ github.event.client_payload.repository }}
+          secrets: ${{ github.event.client_payload.secrets || '{}' }}
+          variables: ${{ github.event.client_payload.variables || '{}' }}
 ...

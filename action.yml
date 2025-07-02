@@ -3,18 +3,32 @@ name: Go Action
 description: A GitHub Action written in Go.
 
 inputs:
-  name:
-    description: 'Name to greet'
+  delete:
+    description: 'Delete the environment'
+    required: false
+    default: 'false'
+  environment:
+    description: 'Environment name'
     required: true
-    default: 'World'
-
-outputs:
-  greeting:
-    description: 'The greeting message'
+  repository:
+    description: 'Repository name'
+    required: true
+  secrets:
+    description: 'Secrets to set in the environment'
+    required: false
+    default: '{}'
+  variables:
+    description: 'Variables to set in the environment'
+    required: false
+    default: '{}'
 
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.name }}
+    - ${{ inputs.delete }}
+    - ${{ inputs.environment }}
+    - ${{ inputs.repository }}
+    - ${{ inputs.secrets }}
+    - ${{ inputs.variables }}
 ...

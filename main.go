@@ -219,6 +219,8 @@ func init() {
 	if err != nil {
 		githubactions.Fatalf("failed to unmarshal secrets: %v", err)
 	}
+
+	delete = githubactions.GetInput("delete") == "true"
 }
 
 func main() {
